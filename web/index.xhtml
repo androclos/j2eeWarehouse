@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:rich="http://richfaces.org/rich">
+    <h:head>
+        <title>Login Page</title>
+    </h:head>
+    <h:body>
+       <br />
+       <h:form id="loginform">
+            <div align="center">
+                <rich:panel header="LogIn Panel" style="width:320px;">
+                    <h:panelGrid columns="2">
+                        
+                        <h:outputLabel value="Name:" />
+                        <h:inputText value="#{LoginController.userbean.username}" />
+                    
+        
+                        <h:outputLabel value="Password:" />
+                        <h:inputSecret value="#{LoginController.userbean.password}" />
+                    
+                    </h:panelGrid>
+                    <h:commandButton value="Login" type="submit" action="#{LoginController.login()}" />
+                </rich:panel>
+                <h:messages errorClass="errorMessage" id="loginerror"/>
+            </div>
+       </h:form>
+
+        
+    </h:body>
+</html>
+

@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>User Page</title>
+    </h:head>
+    <h:body>
+        <h:form id="formd">
+            <div align="center">
+                You are logged in as: #{LoginController.userbean.username}
+                <h:commandButton value="Logout" action="#{LoginController.logout()}" />
+                <p:dataTable value="#{UserPageController.itemlsit}" var="item" id="table" style="text-align: center; width:900px;" selection="#{UserPageController.selected}" rowKey="#{item}">
+                    <p:column selectionMode="single" style="width:16px;text-align:center"/>
+                    <p:column headerText="Id">
+                        <h:outputText value="#{item.itemid}" />
+                    </p:column>
+
+                    <p:column headerText="Name" filterBy="#{item.name}">
+                        <h:outputText value="#{item.name}" />
+                    </p:column>
+
+                    <p:column headerText="Type">
+                        <h:outputText value="#{item.type}" />
+                    </p:column>
+
+                    <p:column headerText="Amount">
+                        <h:outputText value="#{item.amount}" />
+                    </p:column>
+
+                    <p:column headerText="Comment">
+                        <h:outputText value="#{item.comment}" />
+                    </p:column>
+    
+                </p:dataTable>
+               
+                <p:panel id="basic" header="Modify Comment" style="width: 300px">
+                        <h:inputTextarea rows="5" id="texb" style="resize: none"  value="#{UserPageController.changedcomment}"/>
+                        <p:commandButton value="Update Comment" actionListener="#{UserPageController.updatecomment()}" update="table"/>
+                </p:panel>
+                
+                <p:panel id="itemmovemnet" header="Item Movement" style="width: 600px">
+                    <p:selectOneRadio id="customRadio" value="#{UserPageController.selectedoperation}">
+                        <f:selectItem itemLabel="Add New Item  " itemValue="1" />
+                        <f:selectItem itemLabel="Add Existing Item  " itemValue="2" />
+                        <f:selectItem itemLabel="Take Out Item  " itemValue="3" />
+                    </p:selectOneRadio>
+                </p:panel>
+                
+            </div>
+        </h:form>
+    </h:body>
+</html>
+
