@@ -6,7 +6,6 @@
 package ejb.jpa;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,11 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -31,15 +27,17 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "itemmovement")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Itemmovement.findAll", query = "SELECT i FROM Itemmovement i"),
     @NamedQuery(name = "Itemmovement.findByItemmovementid", query = "SELECT i FROM Itemmovement i WHERE i.itemmovementid = :itemmovementid"),
     @NamedQuery(name = "Itemmovement.findByOperation", query = "SELECT i FROM Itemmovement i WHERE i.operation = :operation"),
     @NamedQuery(name = "Itemmovement.findByVerdict", query = "SELECT i FROM Itemmovement i WHERE i.verdict = :verdict"),
+    @NamedQuery(name = "Itemmovement.findByAmount", query = "SELECT i FROM Itemmovement i WHERE i.amount = :amount"),
     @NamedQuery(name = "Itemmovement.findByRequestdate", query = "SELECT i FROM Itemmovement i WHERE i.requestdate = :requestdate"),
     @NamedQuery(name = "Itemmovement.findByVerdictdate", query = "SELECT i FROM Itemmovement i WHERE i.verdictdate = :verdictdate"),
-    @NamedQuery(name = "Itemmovement.findByAmount", query = "SELECT i FROM Itemmovement i WHERE i.amount = :amount")})
+    @NamedQuery(name = "Itemmovement.findByMovementdate", query = "SELECT i FROM Itemmovement i WHERE i.movementdate = :movementdate"),
+    @NamedQuery(name = "Itemmovement.findByItemmovementcol", query = "SELECT i FROM Itemmovement i WHERE i.itemmovementcol = :itemmovementcol"),
+    @NamedQuery(name = "Itemmovement.findByVerdictreason", query = "SELECT i FROM Itemmovement i WHERE i.verdictreason = :verdictreason")})
 public class Itemmovement implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -57,17 +55,26 @@ public class Itemmovement implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "verdict")
     private String verdict;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "requestdate")
-    @Temporal(TemporalType.DATE)
-    private Date requestdate;
-    @Column(name = "verdictdate")
-    @Temporal(TemporalType.DATE)
-    private Date verdictdate;
     @Size(max = 45)
     @Column(name = "amount")
     private String amount;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "requestdate")
+    private String requestdate;
+    @Size(max = 45)
+    @Column(name = "verdictdate")
+    private String verdictdate;
+    @Size(max = 45)
+    @Column(name = "movementdate")
+    private String movementdate;
+    @Size(max = 45)
+    @Column(name = "itemmovementcol")
+    private String itemmovementcol;
+    @Size(max = 245)
+    @Column(name = "verdictreason")
+    private String verdictreason;
     @JoinColumn(name = "User_operatorid", referencedColumnName = "userid")
     @ManyToOne(fetch = FetchType.EAGER)
     private User useroperatorid;
@@ -85,7 +92,7 @@ public class Itemmovement implements Serializable {
         this.itemmovementid = itemmovementid;
     }
 
-    public Itemmovement(Integer itemmovementid, String operation, String verdict, Date requestdate) {
+    public Itemmovement(Integer itemmovementid, String operation, String verdict, String requestdate) {
         this.itemmovementid = itemmovementid;
         this.operation = operation;
         this.verdict = verdict;
@@ -116,28 +123,52 @@ public class Itemmovement implements Serializable {
         this.verdict = verdict;
     }
 
-    public Date getRequestdate() {
-        return requestdate;
-    }
-
-    public void setRequestdate(Date requestdate) {
-        this.requestdate = requestdate;
-    }
-
-    public Date getVerdictdate() {
-        return verdictdate;
-    }
-
-    public void setVerdictdate(Date verdictdate) {
-        this.verdictdate = verdictdate;
-    }
-
     public String getAmount() {
         return amount;
     }
 
     public void setAmount(String amount) {
         this.amount = amount;
+    }
+
+    public String getRequestdate() {
+        return requestdate;
+    }
+
+    public void setRequestdate(String requestdate) {
+        this.requestdate = requestdate;
+    }
+
+    public String getVerdictdate() {
+        return verdictdate;
+    }
+
+    public void setVerdictdate(String verdictdate) {
+        this.verdictdate = verdictdate;
+    }
+
+    public String getMovementdate() {
+        return movementdate;
+    }
+
+    public void setMovementdate(String movementdate) {
+        this.movementdate = movementdate;
+    }
+
+    public String getItemmovementcol() {
+        return itemmovementcol;
+    }
+
+    public void setItemmovementcol(String itemmovementcol) {
+        this.itemmovementcol = itemmovementcol;
+    }
+
+    public String getVerdictreason() {
+        return verdictreason;
+    }
+
+    public void setVerdictreason(String verdictreason) {
+        this.verdictreason = verdictreason;
     }
 
     public User getUseroperatorid() {

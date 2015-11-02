@@ -42,13 +42,34 @@
                         <p:commandButton value="Update Comment" actionListener="#{UserPageController.updatecomment()}" update="table"/>
                 </p:panel>
                 
-                <p:panel id="itemmovemnet" header="Item Movement" style="width: 600px">
-                    <p:selectOneRadio id="customRadio" value="#{UserPageController.selectedoperation}">
-                        <f:selectItem itemLabel="Add New Item  " itemValue="1" />
-                        <f:selectItem itemLabel="Add Existing Item  " itemValue="2" />
-                        <f:selectItem itemLabel="Take Out Item  " itemValue="3" />
-                    </p:selectOneRadio>
+                <p:panel id="itemmovemnet" header="Item Movement" style="width: 650px">
+
+                    
+                    <h:panelGrid columns="2">
+                       
+                        <h:outputLabel value="Operation:" style="font-weight:bold" />
+                        <p:selectOneRadio id="customRadio" value="#{UserPageController.selectedoperation}">
+                            <f:selectItem itemLabel="Add New Item  " itemValue="1" />
+                            <f:selectItem itemLabel="Add Existing Item  " itemValue="2" />
+                            <f:selectItem itemLabel="Take Out Item  " itemValue="3" />
+                        </p:selectOneRadio>
+                        
+                        
+                        <h:outputLabel value="New Item Name: " style="font-weight:bold" />
+                        <h:inputText/>
+                    
+        
+                        <h:outputLabel value="Item Amount: " style="font-weight:bold" />
+                        <h:inputText/>
+                        
+                        <h:outputLabel value="Movement Date: " style="font-weight:bold" />
+                        <p:calendar mode="inline" />
+                        
+                    </h:panelGrid>
+                    <p:commandButton value="Add Item Movement Request"/>
                 </p:panel>
+                
+                
                 
             </div>
         </h:form>
