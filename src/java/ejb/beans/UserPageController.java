@@ -16,6 +16,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
@@ -57,8 +58,32 @@ public class UserPageController implements Serializable{
     private String newitemname;
     private String itemamount;
     private Date movementdate;
-    
 
+    public String getNewitemname() {
+        return newitemname;
+    }
+
+    public void setNewitemname(String newitemname) {
+        this.newitemname = newitemname;
+    }
+
+    public String getItemamount() {
+        return itemamount;
+    }
+
+    public void setItemamount(String itemamount) {
+        this.itemamount = itemamount;
+    }
+
+    public Date getMovementdate() {
+        return movementdate;
+    }
+
+    public void setMovementdate(Date movementdate) {
+        this.movementdate = movementdate;
+    }
+     
+    
     public String getSelectedoperation() {
         return selectedoperation;
     }
@@ -134,5 +159,14 @@ public class UserPageController implements Serializable{
     
     }
 
+    public void addItemMovement(){
+    
+        
+        
+    
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage("formd:msg",new FacesMessage(movementdate.toString()));
+    
+    }
     
 }

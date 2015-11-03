@@ -44,7 +44,7 @@
                 
                 <p:panel id="itemmovemnet" header="Item Movement" style="width: 650px">
 
-                    
+                    <h:messages id="msg"/>
                     <h:panelGrid columns="2">
                        
                         <h:outputLabel value="Operation:" style="font-weight:bold" />
@@ -56,17 +56,17 @@
                         
                         
                         <h:outputLabel value="New Item Name: " style="font-weight:bold" />
-                        <h:inputText/>
+                        <p:inputText value="#{UserPageController.newitemname}" size = "20"/>
                     
         
                         <h:outputLabel value="Item Amount: " style="font-weight:bold" />
-                        <h:inputText/>
+                        <p:inputText value="#{UserPageController.itemamount}" size = "20"/>
                         
                         <h:outputLabel value="Movement Date: " style="font-weight:bold" />
-                        <p:calendar mode="inline" />
+                        <p:calendar value="#{UserPageController.movementdate}" mode="inline" />
                         
                     </h:panelGrid>
-                    <p:commandButton value="Add Item Movement Request"/>
+                    <p:commandButton actionListener="#{UserPageController.addItemMovement()}" value="Add Item Movement Request" update="msg"/>
                 </p:panel>
                 
                 
