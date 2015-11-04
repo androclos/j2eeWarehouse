@@ -28,4 +28,10 @@ public class ItemmovementFacade extends AbstractFacade<Itemmovement> {
         super(Itemmovement.class);
     }
     
+    public void persisT(Itemmovement item){
+    
+        this.create(item);
+    
+    }
+    
 }

@@ -8,6 +8,7 @@ package ejb.beans;
 import ejb.ejbs.ItemFacade;
 import ejb.ejbs.ItemmovementFacade;
 import ejb.jpa.Item;
+import ejb.jpa.Itemmovement;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
@@ -55,10 +56,20 @@ public class UserPageController implements Serializable{
     
     /*-----------------------------------------*/
     private String selectedoperation = "1";
-    private String newitemname;
-    private String itemamount;
+    private String newitemname = null;
+    private String itemamount = null;
     private Date movementdate;
+    private String newitemmessage;
 
+    public String getNewitemmessage() {
+        return newitemmessage;
+    }
+
+    public void setNewitemmessage(String newitemmessage) {
+        this.newitemmessage = newitemmessage;
+    }
+
+    
     public String getNewitemname() {
         return newitemname;
     }
@@ -161,12 +172,74 @@ public class UserPageController implements Serializable{
 
     public void addItemMovement(){
     
+        switch(selectedoperation){
         
-        
-    
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage("formd:msg",new FacesMessage(movementdate.toString()));
-    
+            case "1": {
+            
+                if(newitemname.equals(null) || itemamount.equals(null) || newitemname.isEmpty() || itemamount.isEmpty()){
+                    newitemmessage = "• Error: Emtpy name or amount field.";
+                    return;
+                }
+                
+                Itemmovement newitemmov = new Itemmovement();
+                
+                newitemmov.setOperation("addnewitem");
+                newitemmov.setVerdict("pending");
+                newitemmov.setUserrequesterid(logcon.getCurrentuser());
+                newitemmov.setAmount(itemamount);
+                newitemmov.setRequestdate((new Date()).toString());
+                newitemmov.setMovementdate(movementdate.toString());
+                
+                itemmovementfacade.persisT(newitemmov);
+                newitemmessage = "Request added";
+                break;
+            }
+            case "2": {
+                   
+                if(selected == null || itemamount.equals(null)){
+                    newitemmessage = "• Error: No item selected or empty amount field.";
+                    return;
+                }
+                
+                Itemmovement newitemmov = new Itemmovement();
+                
+                newitemmov.setOperation("addtoexistingitem");
+                newitemmov.setVerdict("pending");
+                newitemmov.setUserrequesterid(logcon.getCurrentuser());
+                newitemmov.setAmount(itemamount);
+                newitemmov.setRequestdate((new Date()).toString());
+                newitemmov.setMovementdate(movementdate.toString());
+                newitemmov.setItemitemid(selected);
+                
+                itemmovementfacade.persisT(newitemmov);
+                newitemmessage = "Request added";
+                break;
+            }
+            case "3": {
+            
+                if(selected == null || itemamount.equals(null)){
+                    newitemmessage = "• Error: No item selected or empty amount field.";
+                    return;
+                }
+                
+                Itemmovement newitemmov = new Itemmovement();
+                
+                newitemmov.setOperation("takeoutitem");
+                newitemmov.setVerdict("pending");
+                newitemmov.setUserrequesterid(logcon.getCurrentuser());
+                newitemmov.setAmount(itemamount);
+                newitemmov.setRequestdate((new Date()).toString());
+                newitemmov.setMovementdate(movementdate.toString());
+                newitemmov.setItemitemid(selected);
+                
+                itemmovementfacade.persisT(newitemmov);
+                newitemmessage = "Request added";
+                break;
+            }
+            default: {break;}
+
+        }
+
     }
     
 }
