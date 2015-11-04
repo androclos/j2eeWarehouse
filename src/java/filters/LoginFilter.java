@@ -54,8 +54,20 @@ public class LoginFilter implements Filter{
         else
             chain.doFilter(req, resp);*/
         
-       if(req.getRequestURI().contains("newjsf") && logcon.getCurrentuser() == null)
-            resp.sendRedirect(req.getContextPath()+ "/faces/index.xhtml");
+        
+        if(!(req.getRequestURI().contains("faces")) || !(req.getRequestURI().contains("faces"))){
+        
+           resp.sendRedirect("faces/index.xhtml");
+           return;
+        
+        }
+        
+        if((req.getRequestURI().contains("newjsf.xhtml") || url.contains("newjsf.xhtml")) && logcon.getCurrentuser() == null){
+            //resp.sendRedirect(req.getContextPath()+ "/faces/index.xhtml");
+           resp.sendRedirect("index.xhtml");
+           return;
+            
+       }
 
        chain.doFilter(req, resp);
         
