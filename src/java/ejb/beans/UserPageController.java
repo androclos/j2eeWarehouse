@@ -62,8 +62,17 @@ public class UserPageController implements Serializable{
     private String itemamount = null;
     private Date movementdate;
     private String newitemmessage;
+    private String movementopmessage;
     private List<Itemmovement> itemmovlist = null;
     private Itemmovement selectedmov;
+
+    public String getMovementopmessage() {
+        return movementopmessage;
+    }
+
+    public void setMovementopmessage(String movementopmessage) {
+        this.movementopmessage = movementopmessage;
+    }
 
     public Itemmovement getSelectedmov() {
         return selectedmov;
@@ -273,5 +282,29 @@ public class UserPageController implements Serializable{
     
     }
     
+    public void itemListRedirect() throws IOException{
+    
+         FacesContext facesContext=FacesContext.getCurrentInstance();
+         ExternalContext externalContext=facesContext.getExternalContext();
+         
+         externalContext.redirect("newjsf.xhtml");
+    
+    }
+    
+    public void deleteItemMovement(){
+    
+        if(selectedmov == null){
+            movementopmessage = "No request was selected.";
+            return;
+        }
+    
+        if(!selectedmov.getVerdict().equals("pending")){
+            movementopmessage = "Request is not pending, you cant delete it.";
+            return;
+        }
+        
+        itemmovementfacade.removE(selectedmov);
+    
+    }
     
 }

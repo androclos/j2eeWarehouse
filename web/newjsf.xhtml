@@ -11,18 +11,15 @@
     <h:body>
         <h:form id="formd">
             <div align="center">
-                
                 <p:panel id="usermenu" header="User Menu">
+                    <div align="left">You are logged in as: #{LoginController.userbean.username}</div>
                     <p:panelMenu style="width:300px">
                         <p:submenu label="User Menu">
                             <p:menuitem value="Item Movements" icon="ui-icon-radio-off" actionListener="#{UserPageController.itemMovmentRedirect}"/>
                             <p:menuitem value="Logout" icon="ui-icon-radio-off" actionListener="#{LoginController.logout()}"/>
                         </p:submenu>
                     </p:panelMenu>
-                    You are logged in as: #{LoginController.userbean.username}
-                </p:panel>
-                
-                
+                </p:panel> 
                 <p:dataTable value="#{UserPageController.itemlsit}" var="item" id="table" style="text-align: center; width:900px;" selection="#{UserPageController.selected}" rowKey="#{item}">
                     <p:column selectionMode="single" style="width:16px;text-align:center"/>
                     <p:column headerText="Id">

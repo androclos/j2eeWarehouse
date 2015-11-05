@@ -8,44 +8,55 @@
         <title>Item Movement</title>
     </h:head>
     <h:body>
-    
-        <div align="center">
-        <p:dataTable value="#{UserPageController.itemmovlist}" var="movitem" id="movtable" style="text-align: center; width:1400px;" selection="#{UserPageController.selectedmov}" rowKey="#{movitem}" resizableColumns="true">
-                    <p:column selectionMode="single" style="width:12px;text-align:center"/>
-                    <p:column headerText="Id">
-                        <h:outputText value="#{movitem.itemmovementid}" />
-                    </p:column>
-                    <p:column headerText="Request Date">
-                        <h:outputText value="#{movitem.requestdate}" />
-                    </p:column>
-                    <p:column headerText="Owner Name">
-                        <h:outputText value="#{movitem.userrequesterid.username}" />
-                    </p:column>
-                    <p:column headerText="Item Name">
-                        <h:outputText value="#{movitem.itemitemid.name}" />
-                    </p:column>
-                    <p:column headerText="Movmement Amount">
-                        <h:outputText value="#{movitem.amount}" />
-                    </p:column>
-                    <p:column headerText="Satus Comment">
-                        <h:outputText value="#{movitem.operation}" />
-                    </p:column>
-                    <p:column headerText="Status">
-                        <h:outputText value="#{movitem.verdict}" />
-                    </p:column>
-                    <p:column headerText="Operator Name">
-                        <h:outputText value="#{movitem.userrequesterid.username}" />
-                    </p:column>
-                    <p:column headerText="Status Change Date">
-                        <h:outputText value="#{movitem.verdictdate}" />
-                    </p:column>
-                    <p:column headerText="Satus Comment">
-                        <h:outputText value="#{movitem.verdictreason}" />
-                    </p:column>
-        </p:dataTable>
-        </div>
-        
-        
+        <h:form id="movformd">
+            <div align="center">
+                <p:panel id="usermenu" header="User Menu">
+                <div align="left">You are logged in as: #{LoginController.userbean.username}</div>
+                    <p:panelMenu style="width:300px">
+                        <p:submenu label="User Menu">
+                            <p:menuitem value="Item List" icon="ui-icon-radio-off" actionListener="#{UserPageController.itemListRedirect()}"/>
+                            <p:menuitem value="Logout" icon="ui-icon-radio-off" actionListener="#{LoginController.logout()}"/>
+                        </p:submenu>
+                    </p:panelMenu>
+                <p:commandButton value="Delete Request" actionListener="#{UserPageController.deleteItemMovement()}" update="movopmsg movtable"/>
+                </p:panel>
+                <h:outputText id="movopmsg" value="#{UserPageController.movementopmessage}" />
+                <p:dataTable value="#{UserPageController.itemmovlist}" var="movitem" id="movtable" style="text-align: center; width:1400px;" selection="#{UserPageController.selectedmov}" rowKey="#{movitem}" resizableColumns="true">
+                            <p:column selectionMode="single" style="width:12px;text-align:center"/>
+                            <p:column headerText="Id">
+                                <h:outputText value="#{movitem.itemmovementid}" />
+                            </p:column>
+                            <p:column headerText="Request Date">
+                                <h:outputText value="#{movitem.requestdate}" />
+                            </p:column>
+                            <p:column headerText="Owner Name">
+                                <h:outputText value="#{movitem.userrequesterid.username}" />
+                            </p:column>
+                            <p:column headerText="Item Name">
+                                <h:outputText value="#{movitem.itemitemid.name}" />
+                            </p:column>
+                            <p:column headerText="Movmement Amount">
+                                <h:outputText value="#{movitem.amount}" />
+                            </p:column>
+                            <p:column headerText="Satus Comment">
+                                <h:outputText value="#{movitem.operation}"/>
+                            </p:column>
+                            <p:column headerText="Status">
+                                <h:outputText value="#{movitem.verdict}" />
+                            </p:column>
+                            <p:column headerText="Operator Name">
+                                <h:outputText value="#{movitem.userrequesterid.username}" />
+                            </p:column>
+                            <p:column headerText="Status Change Date">
+                                <h:outputText value="#{movitem.verdictdate}" />
+                            </p:column>
+                            <p:column headerText="Satus Comment">
+                                <h:outputText value="#{movitem.verdictreason}" />
+                            </p:column>
+                </p:dataTable>
+            </div>
+        </h:form>
+
     </h:body>
 </html>
 

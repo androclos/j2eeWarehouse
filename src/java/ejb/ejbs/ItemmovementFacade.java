@@ -43,4 +43,10 @@ public class ItemmovementFacade extends AbstractFacade<Itemmovement> {
     
     }
     
+    public void removE(Itemmovement e){
+    
+        this.remove(e);
+    
+    }
+    
 }
