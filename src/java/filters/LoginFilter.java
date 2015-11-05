@@ -39,21 +39,9 @@ public class LoginFilter implements Filter{
         
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
-        //LoginController a = (LoginController)req.getSession(false).getAttribute("LoginController");
-        //User u = a.getCurrentuser();
         
         String url = req.getRequestURL().toString();
-   
-        
-        /*if(!req.getRequestURI().contains("xhtml") && logcon.getCurrentuser() == null)
-            chain.doFilter(req, resp); 
-            //resp.sendRedirect(req.getContextPath());
-            
-        else if(logcon.getCurrentuser() == null)
-            resp.sendRedirect(req.getContextPath()+"/");
-        else
-            chain.doFilter(req, resp);*/
-        
+
         
         if(!(req.getRequestURI().contains("faces")) || !(req.getRequestURI().contains("faces"))){
         

@@ -73,7 +73,10 @@ public class LoginController implements Serializable {
             setUserBean(currentuser);
             
 
-            return "/newjsf?faces-redirect=true";
+            if(currentuser.getRole().equals("operator"))
+                return "/operatorpage?faces-redirect=true";
+            else
+                return "/newjsf?faces-redirect=true";
         }
         
         faceMessage("There is no such user or the password is wrong.");
