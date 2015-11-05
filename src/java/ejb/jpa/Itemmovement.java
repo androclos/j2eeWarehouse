@@ -30,6 +30,7 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Itemmovement.findAll", query = "SELECT i FROM Itemmovement i"),
     @NamedQuery(name = "Itemmovement.findByItemmovementid", query = "SELECT i FROM Itemmovement i WHERE i.itemmovementid = :itemmovementid"),
+    @NamedQuery(name = "Itemmovement.findByOwner", query = "SELECT i FROM Itemmovement i WHERE i.userrequesterid = :userid"),
     @NamedQuery(name = "Itemmovement.findByOperation", query = "SELECT i FROM Itemmovement i WHERE i.operation = :operation"),
     @NamedQuery(name = "Itemmovement.findByVerdict", query = "SELECT i FROM Itemmovement i WHERE i.verdict = :verdict"),
     @NamedQuery(name = "Itemmovement.findByAmount", query = "SELECT i FROM Itemmovement i WHERE i.amount = :amount"),

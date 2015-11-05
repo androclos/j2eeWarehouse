@@ -11,8 +11,18 @@
     <h:body>
         <h:form id="formd">
             <div align="center">
-                You are logged in as: #{LoginController.userbean.username}
-                <h:commandButton value="Logout" action="#{LoginController.logout()}" />
+                
+                <p:panel id="usermenu" header="User Menu">
+                    <p:panelMenu style="width:300px">
+                        <p:submenu label="User Menu">
+                            <p:menuitem value="Item Movements" icon="ui-icon-radio-off" actionListener="#{UserPageController.itemMovmentRedirect}"/>
+                            <p:menuitem value="Logout" icon="ui-icon-radio-off" actionListener="#{LoginController.logout()}"/>
+                        </p:submenu>
+                    </p:panelMenu>
+                    You are logged in as: #{LoginController.userbean.username}
+                </p:panel>
+                
+                
                 <p:dataTable value="#{UserPageController.itemlsit}" var="item" id="table" style="text-align: center; width:900px;" selection="#{UserPageController.selected}" rowKey="#{item}">
                     <p:column selectionMode="single" style="width:16px;text-align:center"/>
                     <p:column headerText="Id">
@@ -33,8 +43,7 @@
 
                     <p:column headerText="Comment">
                         <h:outputText value="#{item.comment}" />
-                    </p:column>
-    
+                    </p:column>   
                 </p:dataTable>
                
                 <p:panel id="basic" header="Modify Comment" style="width: 300px">

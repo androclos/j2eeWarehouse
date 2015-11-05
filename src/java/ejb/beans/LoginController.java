@@ -72,8 +72,7 @@ public class LoginController implements Serializable {
             clearUserBean();
             setUserBean(currentuser);
             
-            //return "userpage.xhtml";
-            //return "/userpage?faces-redirect=true";
+
             return "/newjsf?faces-redirect=true";
         }
         

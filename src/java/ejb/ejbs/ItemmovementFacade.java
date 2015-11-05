@@ -5,7 +5,10 @@
  */
 package ejb.ejbs;
 
+import ejb.jpa.Item;
 import ejb.jpa.Itemmovement;
+import ejb.jpa.User;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -31,6 +34,12 @@ public class ItemmovementFacade extends AbstractFacade<Itemmovement> {
     public void persisT(Itemmovement item){
     
         this.create(item);
+    
+    }
+    
+    public List<Itemmovement> getitems(User u){
+    
+        return this.em.createNamedQuery("Itemmovement.findByOwner").setParameter("userid", u).getResultList();
     
     }
     

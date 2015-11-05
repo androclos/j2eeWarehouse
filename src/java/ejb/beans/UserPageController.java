@@ -9,6 +9,7 @@ import ejb.ejbs.ItemFacade;
 import ejb.ejbs.ItemmovementFacade;
 import ejb.jpa.Item;
 import ejb.jpa.Itemmovement;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIInput;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
@@ -60,7 +62,28 @@ public class UserPageController implements Serializable{
     private String itemamount = null;
     private Date movementdate;
     private String newitemmessage;
+    private List<Itemmovement> itemmovlist = null;
+    private Itemmovement selectedmov;
 
+    public Itemmovement getSelectedmov() {
+        return selectedmov;
+    }
+
+    public void setSelectedmov(Itemmovement selectedmov) {
+        this.selectedmov = selectedmov;
+    }
+    
+    public List<Itemmovement> getItemmovlist() {
+        if(logcon.getCurrentuser() != null)
+        this.itemmovlist = this.itemmovementfacade.getitems(this.logcon.getCurrentuser());
+        return itemmovlist;
+    }
+
+    public void setItemmovlist(List<Itemmovement> itemmovlist) {
+        this.itemmovlist = itemmovlist;
+    }
+
+    
     public String getNewitemmessage() {
         return newitemmessage;
     }
@@ -123,7 +146,6 @@ public class UserPageController implements Serializable{
 
     public List<Item> getItemlsit() {
         if(logcon.getCurrentuser() != null)
-        //this.itemlsit = this.logcon.userItems();
         this.itemlsit = this.itemfacade.getitems(this.logcon.getCurrentuser());
         return itemlsit;
     }
@@ -241,5 +263,15 @@ public class UserPageController implements Serializable{
         }
 
     }
+    
+    public void itemMovmentRedirect() throws IOException{
+    
+         FacesContext facesContext=FacesContext.getCurrentInstance();
+         ExternalContext externalContext=facesContext.getExternalContext();
+         
+         externalContext.redirect("itemmovpage.xhtml");
+    
+    }
+    
     
 }
