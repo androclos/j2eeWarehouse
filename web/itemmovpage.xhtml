@@ -11,7 +11,7 @@
         <h:form id="movformd">
             <div align="center">
                 <p:panel id="usermenu" header="User Menu">
-                <div align="left">You are logged in as: #{LoginController.userbean.username}</div>
+                <div align="left">You are logged in as: <h:outputText value="#{LoginController.userbean.username} " style="font-weight:bold"/> </div>
                     <p:panelMenu style="width:300px">
                         <p:submenu label="User Menu">
                             <p:menuitem value="Item List" icon="ui-icon-radio-off" actionListener="#{UserPageController.itemListRedirect()}"/>
@@ -38,7 +38,7 @@
                             <p:column headerText="Movmement Amount">
                                 <h:outputText value="#{movitem.amount}" />
                             </p:column>
-                            <p:column headerText="Satus Comment">
+                            <p:column headerText="Operation">
                                 <h:outputText value="#{movitem.operation}"/>
                             </p:column>
                             <p:column headerText="Status">

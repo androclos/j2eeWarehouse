@@ -1,12 +1,68 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Operator Page</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <h:form id="formo">
+            <div align="center">
+                <p:panel id="opmenu" header="Operator Menu" style="font-size:14px;">
+                <div align="left">
+                    You are logged in as: <h:outputText value="#{LoginController.userbean.username} " style="font-weight:bold"/> 
+                    <p:commandButton value="Logout" actionListener="#{LoginController.logout()}"/>
+                </div>
+                    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" columnClasses="label, value">
+                        <p:outputLabel for="basic" value="Status:" />
+                        <p:selectOneListbox id="basic" value="#{OperatorPageController.outcome}">
+                            <f:selectItem itemLabel="Accept Request" itemValue="accepted" />
+                            <f:selectItem itemLabel="Deny Request" itemValue="denied" />
+                        </p:selectOneListbox>
+                        
+                        <p:outputLabel for="texop" value="Status Comment:" />
+                        <h:inputTextarea rows="5" id="texop" style="resize: none"  value="#{OperatorPageController.verdictreson}"/>
+                    </h:panelGrid>
+                    <p:commandButton value="Set Satus" actionListener="#{OperatorPageController.setStatus()}" update="opmovtable opmsg"/>
+                </p:panel>
+                <h:outputText id="opmsg" value="#{OperatorPageController.opmessage} " style="font-weight:bold"/>
+                <p:dataTable value="#{OperatorPageController.allmovlist}" var="movitem" id="opmovtable" style="font-size:12px;text-align: center; width:1500px;" selection="#{OperatorPageController.selected}" rowKey="#{movitem}" resizableColumns="true">
+                            <p:column selectionMode="single" style="width:12px;text-align:center;"/>
+                            <p:column headerText="Id">
+                                <h:outputText value="#{movitem.itemmovementid}"/>
+                            </p:column>
+                            <p:column headerText="Request Date">
+                                <h:outputText value="#{movitem.requestdate}" />
+                            </p:column>
+                            <p:column headerText="Owner Name">
+                                <h:outputText value="#{movitem.userrequesterid.username}" />
+                            </p:column>
+                            <p:column headerText="Item Name">
+                                <h:outputText value="#{movitem.itemitemid.name}" />
+                            </p:column>
+                            <p:column headerText="Movmement Amount">
+                                <h:outputText value="#{movitem.amount}" />
+                            </p:column>
+                            <p:column headerText="Operation">
+                                <h:outputText value="#{movitem.operation}"/>
+                            </p:column>
+                            <p:column headerText="Status">
+                                <h:outputText value="#{movitem.verdict}" />
+                            </p:column>
+                            <p:column headerText="Operator Name">
+                                <h:outputText value="#{movitem.useroperatorid.username}" />
+                            </p:column>
+                            <p:column headerText="Status Change Date">
+                                <h:outputText value="#{movitem.verdictdate}" />
+                            </p:column>
+                            <p:column headerText="Satus Comment">
+                                <h:outputText value="#{movitem.verdictreason}" />
+                            </p:column>
+                </p:dataTable>
+            </div>
+        </h:form>
     </h:body>
 </html>
 

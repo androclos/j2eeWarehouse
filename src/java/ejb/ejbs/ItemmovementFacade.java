@@ -49,4 +49,15 @@ public class ItemmovementFacade extends AbstractFacade<Itemmovement> {
     
     }
     
+    public List<Itemmovement> getallitems(){
+    
+        return this.findAll();
+    
+    }
+    
+        public void ediT(Itemmovement t){
+    
+        this.edit(t);
+    
+    }
 }

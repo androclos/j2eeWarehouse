@@ -304,7 +304,8 @@ public class UserPageController implements Serializable{
         }
         
         itemmovementfacade.removE(selectedmov);
-    
+        movementopmessage = "Request is deleted.";
+        
     }
     
 }
