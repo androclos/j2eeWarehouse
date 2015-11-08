@@ -65,6 +65,17 @@ public class UserPageController implements Serializable{
     private String movementopmessage;
     private List<Itemmovement> itemmovlist = null;
     private Itemmovement selectedmov;
+    
+    private String namefilter = " ";
+
+    public String getNamefilter() {
+        return namefilter;
+    }
+
+    public void setNamefilter(String namefilter) {
+        this.namefilter = namefilter;
+    }
+
 
     public String getMovementopmessage() {
         return movementopmessage;
@@ -170,6 +181,7 @@ public class UserPageController implements Serializable{
         this.selected.setComment(changedcomment);
         this.itemfacade.ediT(selected);
         this.itemlsit = this.logcon.userItems();
+        this.namefilter = " ";
 
     }
     

@@ -20,6 +20,41 @@
                         </p:submenu>
                     </p:panelMenu>
                 </p:panel> 
+                
+                <h:panelGrid columns="2">
+                    <p:panel id="basic" header="Modify Comment" style="width: 300px">
+                            <h:inputTextarea rows="5" id="texb" style="resize: none"  value="#{UserPageController.changedcomment}"/>
+                            <p:commandButton value="Update Comment" actionListener="#{UserPageController.updatecomment()}" update="table"/>
+                    </p:panel>
+
+                    <p:panel id="itemmovemnet" header="Item Movement" style="width: 650px">
+
+                        <h:outputText id="msg" value="#{UserPageController.newitemmessage}" style="font-weight:bold" />
+                        <h:panelGrid columns="2">
+
+                            <h:outputLabel value="Operation:" style="font-weight:bold" />
+                            <p:selectOneRadio id="customRadio" value="#{UserPageController.selectedoperation}">
+                                <f:selectItem itemLabel="Add New Item  " itemValue="1" />
+                                <f:selectItem itemLabel="Add Existing Item  " itemValue="2" />
+                                <f:selectItem itemLabel="Take Out Item  " itemValue="3" />
+                            </p:selectOneRadio>
+
+
+                            <h:outputLabel value="New Item Name: " style="font-weight:bold" />
+                            <p:inputText value="#{UserPageController.newitemname}" size = "20"/>
+
+
+                            <h:outputLabel value="Item Amount: " style="font-weight:bold" />
+                            <p:inputText value="#{UserPageController.itemamount}" size = "20"/>
+
+                            <h:outputLabel value="Movement Date: " style="font-weight:bold" />
+                            <p:calendar value="#{UserPageController.movementdate}" mode="inline" />
+
+                        </h:panelGrid>
+                        <p:commandButton actionListener="#{UserPageController.addItemMovement()}" value="Add Item Movement Request" update="msg"/>
+                    </p:panel>
+                </h:panelGrid>
+                
                 <p:dataTable value="#{UserPageController.itemlsit}" var="item" id="table" style="text-align: center; width:900px;" selection="#{UserPageController.selected}" rowKey="#{item}">
                     <p:column selectionMode="single" style="width:16px;text-align:center"/>
                     <p:column headerText="Id">
@@ -42,41 +77,6 @@
                         <h:outputText value="#{item.comment}" />
                     </p:column>   
                 </p:dataTable>
-               
-                <p:panel id="basic" header="Modify Comment" style="width: 300px">
-                        <h:inputTextarea rows="5" id="texb" style="resize: none"  value="#{UserPageController.changedcomment}"/>
-                        <p:commandButton value="Update Comment" actionListener="#{UserPageController.updatecomment()}" update="table"/>
-                </p:panel>
-                
-                <p:panel id="itemmovemnet" header="Item Movement" style="width: 650px">
-
-                    <h:outputText id="msg" value="#{UserPageController.newitemmessage}" style="font-weight:bold" />
-                    <h:panelGrid columns="2">
-                       
-                        <h:outputLabel value="Operation:" style="font-weight:bold" />
-                        <p:selectOneRadio id="customRadio" value="#{UserPageController.selectedoperation}">
-                            <f:selectItem itemLabel="Add New Item  " itemValue="1" />
-                            <f:selectItem itemLabel="Add Existing Item  " itemValue="2" />
-                            <f:selectItem itemLabel="Take Out Item  " itemValue="3" />
-                        </p:selectOneRadio>
-                        
-                        
-                        <h:outputLabel value="New Item Name: " style="font-weight:bold" />
-                        <p:inputText value="#{UserPageController.newitemname}" size = "20"/>
-                    
-        
-                        <h:outputLabel value="Item Amount: " style="font-weight:bold" />
-                        <p:inputText value="#{UserPageController.itemamount}" size = "20"/>
-                        
-                        <h:outputLabel value="Movement Date: " style="font-weight:bold" />
-                        <p:calendar value="#{UserPageController.movementdate}" mode="inline" />
-                        
-                    </h:panelGrid>
-                    <p:commandButton actionListener="#{UserPageController.addItemMovement()}" value="Add Item Movement Request" update="msg"/>
-                </p:panel>
-                
-                
-                
             </div>
         </h:form>
     </h:body>
