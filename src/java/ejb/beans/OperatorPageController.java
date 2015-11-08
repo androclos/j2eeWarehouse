@@ -7,13 +7,24 @@ package ejb.beans;
 
 import ejb.ejbs.ItemmovementFacade;
 import ejb.jpa.Itemmovement;
+import java.io.IOException;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.model.DefaultScheduleModel;
+import org.primefaces.model.LazyScheduleModel;
+import org.primefaces.model.ScheduleModel;
+import org.primefaces.model.DefaultScheduleEvent;
 
 /**
  *
@@ -35,6 +46,48 @@ public class OperatorPageController implements Serializable{
     private Itemmovement selected = null;
     private String outcome = "denied";
     private String opmessage;
+    private ScheduleModel lazyEventModel;
+
+    @PostConstruct
+    public void init() {
+    
+        lazyEventModel = new DefaultScheduleModel();
+    
+    }
+    
+    public ScheduleModel getLazyEventModel() throws ParseException {
+        
+        lazyEventModel.clear();
+        List<Itemmovement> list = itemmovementfacade.findAll();
+        SimpleDateFormat converter = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy",Locale.US);
+        
+        for(Itemmovement i : list){
+        
+            Date date = converter.parse(i.getMovementdate());
+            lazyEventModel.addEvent(new DefaultScheduleEvent(i.getUserrequesterid().getUsername(), date, date));
+            
+        }
+        
+        return lazyEventModel;
+    }
+    
+    public void operatorMainPageRedirect() throws IOException{
+    
+         FacesContext facesContext=FacesContext.getCurrentInstance();
+         ExternalContext externalContext=facesContext.getExternalContext();
+         
+         externalContext.redirect("operatorpage.xhtml");
+    
+    }
+    
+    public void operatorCalendarPageRedirect() throws IOException{
+    
+         FacesContext facesContext=FacesContext.getCurrentInstance();
+         ExternalContext externalContext=facesContext.getExternalContext();
+         
+         externalContext.redirect("operatorcalendar.xhtml");
+    
+    }
     
     public OperatorPageController() {
     }

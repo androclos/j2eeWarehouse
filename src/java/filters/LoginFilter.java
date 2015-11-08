@@ -50,13 +50,72 @@ public class LoginFilter implements Filter{
         
         }
         
-        if((req.getRequestURI().contains("newjsf.xhtml") || url.contains("newjsf.xhtml")) && logcon.getCurrentuser() == null){
-            //resp.sendRedirect(req.getContextPath()+ "/faces/index.xhtml");
-           resp.sendRedirect("index.xhtml");
-           return;
+        if((req.getRequestURI().contains("operatorcalendar.xhtml") || url.contains("operatorcalendar.xhtml"))){
             
-       }
+            
+            if(logcon.getCurrentuser() == null){
+                //resp.sendRedirect(req.getContextPath()+ "/faces/index.xhtml");
+               resp.sendRedirect("index.xhtml");
+               return;
+            }
+        
+            if(!logcon.getCurrentuser().getRole().equals("operator")){
+           
+                resp.sendRedirect("newjsf.xhtml");
+                return;
+           }   
+        
+        }
+        
+        if((req.getRequestURI().contains("itemmovpage.xhtml") || url.contains("itemmovpage.xhtml"))){
+            
+            
+            if(logcon.getCurrentuser() == null){
+                //resp.sendRedirect(req.getContextPath()+ "/faces/index.xhtml");
+               resp.sendRedirect("index.xhtml");
+               return;
+            }
+        
+            if(logcon.getCurrentuser().getRole().equals("operator")){
+           
+                resp.sendRedirect("operatorpage.xhtml");
+                return;
+           }   
+        
+        }
+        
+        if((req.getRequestURI().contains("newjsf.xhtml") || url.contains("newjsf.xhtml"))){
+            
+            
+            if(logcon.getCurrentuser() == null){
+                //resp.sendRedirect(req.getContextPath()+ "/faces/index.xhtml");
+               resp.sendRedirect("index.xhtml");
+               return;
+            }
+        
+            if(logcon.getCurrentuser().getRole().equals("operator")){
+           
+                resp.sendRedirect("operatorpage.xhtml");
+                return;
+           }   
+        
+        }
 
+        if((req.getRequestURI().contains("operatorpage.xhtml") || url.contains("operatorpage.xhtml"))){
+
+           if(logcon.getCurrentuser() == null){
+           
+                resp.sendRedirect("index.xhtml");
+                return;
+           } 
+           
+           if(!logcon.getCurrentuser().getRole().equals("operator")){
+           
+                resp.sendRedirect("newjsf.xhtml");
+                return;
+           }   
+        }
+        
        chain.doFilter(req, resp);
         
     }
