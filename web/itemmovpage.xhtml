@@ -29,6 +29,9 @@
                             <p:column headerText="Request Date">
                                 <h:outputText value="#{movitem.requestdate}" />
                             </p:column>
+                            <p:column headerText="Movement Date">
+                                <h:outputText value="#{movitem.movementdate}" />
+                            </p:column>
                             <p:column headerText="Owner Name">
                                 <h:outputText value="#{movitem.userrequesterid.username}" />
                             </p:column>
@@ -45,7 +48,7 @@
                                 <h:outputText value="#{movitem.verdict}" />
                             </p:column>
                             <p:column headerText="Operator Name">
-                                <h:outputText value="#{movitem.userrequesterid.username}" />
+                                <h:outputText value="#{movitem.useroperatorid.username}" />
                             </p:column>
                             <p:column headerText="Status Change Date">
                                 <h:outputText value="#{movitem.verdictdate}" />
