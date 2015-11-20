@@ -12,30 +12,22 @@ import ejb.jpa.Itemmovement;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.component.UIInput;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.event.AjaxBehaviorEvent;
-import javax.faces.event.ValueChangeEvent;
-import javax.faces.model.ArrayDataModel;
-import javax.faces.model.DataModel;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.primefaces.component.datatable.DataTable;
+
 
 /**
  *
  * @author Pifko
  */
 @Named(value="UserPageController")
-@SessionScoped
+@ViewScoped
 public class UserPageController implements Serializable{
     
     @Inject

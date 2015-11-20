@@ -19,6 +19,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.model.DefaultScheduleModel;
@@ -31,7 +32,7 @@ import org.primefaces.model.DefaultScheduleEvent;
  * @author Pifko
  */
 @Named(value="OperatorPageController")
-@SessionScoped
+@ViewScoped
 public class OperatorPageController implements Serializable{
 
     
