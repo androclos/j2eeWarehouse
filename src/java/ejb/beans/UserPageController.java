@@ -57,16 +57,6 @@ public class UserPageController implements Serializable{
     private String movementopmessage;
     private List<Itemmovement> itemmovlist = null;
     private Itemmovement selectedmov;
-    
-    private String namefilter = " ";
-
-    public String getNamefilter() {
-        return namefilter;
-    }
-
-    public void setNamefilter(String namefilter) {
-        this.namefilter = namefilter;
-    }
 
 
     public String getMovementopmessage() {
@@ -84,12 +74,7 @@ public class UserPageController implements Serializable{
     public void setSelectedmov(Itemmovement selectedmov) {
         this.selectedmov = selectedmov;
     }
-    
-    public List<Itemmovement> getItemmovlist() {
-        if(logcon.getCurrentuser() != null)
-        this.itemmovlist = this.itemmovementfacade.getitems(this.logcon.getCurrentuser());
-        return itemmovlist;
-    }
+
 
     public void setItemmovlist(List<Itemmovement> itemmovlist) {
         this.itemmovlist = itemmovlist;
@@ -136,9 +121,7 @@ public class UserPageController implements Serializable{
 
     public void setSelectedoperation(String selectedoperation) {
         this.selectedoperation = selectedoperation;
-    }
-    
-    
+    }    
     
     public String getChangedcomment() {
         return changedcomment;
@@ -161,23 +144,11 @@ public class UserPageController implements Serializable{
         this.itemlsit = this.itemfacade.getitems(this.logcon.getCurrentuser());
         return itemlsit;
     }
-
-
     
     public void setItemlsit(List<Item> itemlsit) {
         this.itemlsit = itemlsit;
     }
 
-    public void updatecomment(){
-      
-        this.selected.setComment(changedcomment);
-        this.itemfacade.ediT(selected);
-        this.itemlsit = this.logcon.userItems();
-        this.namefilter = " ";
-
-    }
-    
-    
     public void setSelecteditem(String selecteditem) {
         this.selecteditem = selecteditem;
     }
@@ -188,23 +159,25 @@ public class UserPageController implements Serializable{
         return selecteditem;
     
     }
-    
-    public List<Item> returnUserItemList(){
-
-        return this.logcon.userItems();
-    
-    }
 
     public ItemBean getItembean() {
         return itembean;
     }
-    
-    public void mas(){
-    
-    this.selecteditem = "ynasgem";
-    
-    }
 
+    public List<Itemmovement> getItemmovlist() {
+        if(logcon.getCurrentuser() != null)
+        this.itemmovlist = this.itemmovementfacade.getitems(this.logcon.getCurrentuser());
+        return itemmovlist;
+    }
+    
+    public void updatecomment(){
+      
+        this.selected.setComment(changedcomment);
+        this.itemfacade.ediT(selected);
+        this.itemlsit = itemfacade.getitems(logcon.getCurrentuser());//this.logcon.userItems();
+
+    }
+    
     public void addItemMovement(){
     
         switch(selectedoperation){

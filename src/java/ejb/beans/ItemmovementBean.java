@@ -6,6 +6,7 @@
 package ejb.beans;
 
 import java.util.Date;
+import javax.inject.Named;
 
 /**
  *

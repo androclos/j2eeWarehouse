@@ -78,15 +78,6 @@ public class LoginController implements Serializable {
         return "index.xhtml";
     }
     
-    public void checkUser() throws IOException{ //van e login
-    
-        if(this.currentuser == null){
-                ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-                ec.redirect(ec.getRequestContextPath() + "/faces/index.xhtml");
-        }
-        
-    
-    }
     
     public void logout(){
     
@@ -105,15 +96,6 @@ public class LoginController implements Serializable {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    }
-    
-    public List<Item> userItems(){
-    
-        
-        this.userfacade.refresh(currentuser);
-        this.currentuser = this.userfacade.find(this.currentuser.getUserid());
-        return this.currentuser.getItemList();
-    
     }
     
     public void faceMessage(String s){

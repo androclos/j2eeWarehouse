@@ -7,6 +7,7 @@ package ejb.beans;
 
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 /**
@@ -15,7 +16,7 @@ import javax.inject.Named;
  */
 
 @Named(value="ItemBean")
-@SessionScoped
+@ViewScoped
 public class ItemBean implements Serializable{
     
     private Integer itemid;
