@@ -74,7 +74,7 @@ public class LoginController implements Serializable {
                 return "/newjsf?faces-redirect=true";
         }
         
-        faceMessage("• There is no such user or the password is wrong.");
+        faceMessage(" There is no such user or the password is wrong.");
         return "index.xhtml";
     }
     
