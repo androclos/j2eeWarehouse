@@ -174,7 +174,7 @@ public class UserPageController implements Serializable{
       
         this.selected.setComment(changedcomment);
         this.itemfacade.ediT(selected);
-        this.itemlsit = itemfacade.getitems(logcon.getCurrentuser());//this.logcon.userItems();
+        this.itemlsit = itemfacade.getitems(logcon.getCurrentuser());
 
     }
     

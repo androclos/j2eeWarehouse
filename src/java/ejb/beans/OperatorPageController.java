@@ -64,8 +64,10 @@ public class OperatorPageController implements Serializable{
         
         for(Itemmovement i : list){
         
-            Date date = converter.parse(i.getMovementdate());
-            lazyEventModel.addEvent(new DefaultScheduleEvent(i.getUserrequesterid().getUsername(), date, date));
+            if(i.getVerdict().equals("accepted")){
+                Date date = converter.parse(i.getMovementdate());
+                lazyEventModel.addEvent(new DefaultScheduleEvent(i.getUserrequesterid().getUsername(), date, date));
+            }
             
         }
         
