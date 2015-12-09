@@ -28,15 +28,6 @@ public class UserFacade extends AbstractFacade<User> {
         super(User.class);
     }
     
-    public void refresh(User u){
-
-        //this.
-        this.em.getEntityManagerFactory().getCache().evict(u.getClass(), u.getUserid());
-        //this.em.refresh(u);
-
-    
-    }
-    
     public User GetUserOnLogin(String name, String password){
     
         try{
@@ -47,7 +38,6 @@ public class UserFacade extends AbstractFacade<User> {
         }
         catch(Exception e){
             
-            //e.printStackTrace();
             return null;
         
         }

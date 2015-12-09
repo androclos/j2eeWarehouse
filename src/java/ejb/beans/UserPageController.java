@@ -184,9 +184,9 @@ public class UserPageController implements Serializable{
         
             case "1": {
             
-                if(newitemname.equals(null) || itemamount.equals(null) || newitemname.isEmpty() || itemamount.isEmpty()){
+                if(newitemname.isEmpty() || itemamount.isEmpty()){
                     newitemmessage = "• Error: Emtpy name or amount field.";
-                    return;
+                    break;
                 }
                 
                 Itemmovement newitemmov = new Itemmovement();
@@ -199,14 +199,14 @@ public class UserPageController implements Serializable{
                 newitemmov.setMovementdate(movementdate.toString());
                 
                 itemmovementfacade.persisT(newitemmov);
-                newitemmessage = "Request added";
+                newitemmessage = "• Request added";
                 break;
             }
             case "2": {
                    
-                if(selected == null || itemamount.equals(null)){
+                if(selected == null || itemamount.isEmpty()){
                     newitemmessage = "• Error: No item selected or empty amount field.";
-                    return;
+                    break;
                 }
                 
                 Itemmovement newitemmov = new Itemmovement();
@@ -220,14 +220,14 @@ public class UserPageController implements Serializable{
                 newitemmov.setItemitemid(selected);
                 
                 itemmovementfacade.persisT(newitemmov);
-                newitemmessage = "Request added";
+                newitemmessage = "• Request added";
                 break;
             }
             case "3": {
             
-                if(selected == null || itemamount.equals(null)){
+                if(selected == null || itemamount.isEmpty()){
                     newitemmessage = "• Error: No item selected or empty amount field.";
-                    return;
+                    break;
                 }
                 
                 Itemmovement newitemmov = new Itemmovement();
@@ -241,7 +241,7 @@ public class UserPageController implements Serializable{
                 newitemmov.setItemitemid(selected);
                 
                 itemmovementfacade.persisT(newitemmov);
-                newitemmessage = "Request added";
+                newitemmessage = "• Request added";
                 break;
             }
             default: {break;}
