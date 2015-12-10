@@ -21,8 +21,32 @@
                     </p:panelMenu>
                 </p:panel>
                 
-                <p:schedule style="height: 1000px;width: 1000px" value="#{OperatorPageController.lazyEventModel}" />
+                <p:schedule style="height: 1000px;width: 1000px" value="#{OperatorPageController.eventModel}">
+                    <p:ajax event="eventSelect" listener="#{OperatorPageController.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                </p:schedule>
             </div>
+            <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
+                <h:panelGrid id="eventDetails" columns="2">
+                    <p:outputLabel for="title1" value="User name:" />
+                    <p:outputLabel id="title1" value="#{OperatorPageController.event}"/>
+                   
+                    <p:outputLabel for="title2" value="Item name:" />
+                    <p:outputLabel id="title2" value="#{OperatorPageController.event.data}"/>
+                    
+                    <p:outputLabel for="title3" value="Item type:" />
+                    <p:outputLabel id="title3" value="#{OperatorPageController.event.data}"/>
+                    
+                    <p:outputLabel for="title4" value="Item amount:" />
+                    <p:outputLabel id="title4" value="#{OperatorPageController.event.data}"/>
+                    
+                    <p:outputLabel for="title5" value="Operation:" />
+                    <p:outputLabel id="title5" value="#{OperatorPageController.event.data}"/>
+                    
+                    <p:outputLabel for="title6" value="Date:" />
+                    <p:outputLabel id="title6" value="#{OperatorPageController.event.data}"/>
+                    
+                </h:panelGrid>
+            </p:dialog> 
         </h:form>>
     </h:body>
 </html>
