@@ -22,10 +22,12 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.LazyScheduleModel;
 import org.primefaces.model.ScheduleModel;
 import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.ScheduleEvent;
 
 /**
  *
@@ -47,18 +49,20 @@ public class OperatorPageController implements Serializable{
     private Itemmovement selected = null;
     private String outcome = "denied";
     private String opmessage;
-    private ScheduleModel lazyEventModel;
+    private ScheduleModel EventModel;
+    private ScheduleEvent event = new DefaultScheduleEvent();
 
     @PostConstruct
     public void init() {
     
-        lazyEventModel = new DefaultScheduleModel();
+        EventModel = new DefaultScheduleModel();
+        event.setId("10");
     
     }
     
-    public ScheduleModel getLazyEventModel() throws ParseException {
+    public ScheduleModel getEventModel() throws ParseException {
         
-        lazyEventModel.clear();
+        EventModel.clear();
         List<Itemmovement> list = itemmovementfacade.findAll();
         SimpleDateFormat converter = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy",Locale.US);
         
@@ -66,12 +70,17 @@ public class OperatorPageController implements Serializable{
         
             if(i.getVerdict().equals("accepted")){
                 Date date = converter.parse(i.getMovementdate());
-                lazyEventModel.addEvent(new DefaultScheduleEvent(i.getUserrequesterid().getUsername(), date, date));
+                //lazyEventModel.addEvent(new DefaultScheduleEvent(i.getUserrequesterid().getUsername(), date, date));
+                
+                DefaultScheduleEvent fg = new DefaultScheduleEvent(i.getUserrequesterid().getUsername(), date, date,i);
+                fg.setId(i.getItemmovementid().toString());
+                EventModel.addEvent(fg);
+
             }
             
         }
         
-        return lazyEventModel;
+        return EventModel;
     }
     
     public void operatorMainPageRedirect() throws IOException{
@@ -131,6 +140,33 @@ public class OperatorPageController implements Serializable{
 
     public void setOutcome(String outcome) {
         this.outcome = outcome;
+    }
+
+    public ScheduleEvent getEvent() {
+        return event;
+    }
+
+    public void setEvent(ScheduleEvent event) {
+        this.event = event;
+    }
+    
+    public void onEventSelect(SelectEvent selectEvent) {
+        this.event = (ScheduleEvent) selectEvent.getObject();
+
+    }
+        
+    public String getItemmovToEvent(){
+    
+        /*for(Itemmovement i : allmovlist){
+        
+            if(i.getItemmovementid().toString().equals(event.getId()))
+                return i;
+        
+        }*/
+    
+        //return allmovlist.get(0);
+        
+        return event.getId();
     }
     
     public void setStatus(){

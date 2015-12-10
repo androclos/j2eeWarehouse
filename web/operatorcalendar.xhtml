@@ -13,6 +13,10 @@
             <div align="center">
                 
                 <p:panel id="opmenu" header="Operator Menu" style="font-size:14px;">
+                    <div align="left">
+                        You are logged in as: <h:outputText value="#{LoginController.userbean.username} " style="font-weight:bold"/>
+                        <p:commandButton value="Logout" actionListener="#{LoginController.logout()}"/>
+                    </div>
                     <p:panelMenu style="width:300px">
                         <p:submenu label="Operator Menu">
                             <p:menuitem value="Operator Main Page" icon="ui-icon-radio-off" actionListener="#{OperatorPageController.operatorMainPageRedirect()}"/>

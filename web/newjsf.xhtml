@@ -12,7 +12,10 @@
         <h:form id="formd">
             <div align="center">
                 <p:panel id="usermenu" header="User Menu">
-                    <div align="left">You are logged in as: <h:outputText value="#{LoginController.userbean.username} " style="font-weight:bold"/> </div>
+                    <div align="left">
+                        You are logged in as: <h:outputText value="#{LoginController.userbean.username} " style="font-weight:bold"/>
+                        <p:commandButton value="Logout" actionListener="#{LoginController.logout()}"/>
+                    </div>
                     <p:panelMenu style="width:300px">
                         <p:submenu label="User Menu">
                             <p:menuitem value="Item Movements" icon="ui-icon-radio-off" actionListener="#{UserPageController.itemMovmentRedirect}"/>
