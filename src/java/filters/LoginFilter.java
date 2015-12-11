@@ -42,8 +42,15 @@ public class LoginFilter implements Filter{
         
         String url = req.getRequestURL().toString();
 
+        if(req.getRequestURI().contains("warehousews")){
         
-        if(!(req.getRequestURI().contains("faces")) || !(req.getRequestURL().toString().contains("Warehouse"))){
+           chain.doFilter(req, resp);
+           return;
+        
+        }
+        
+        
+        if(!(req.getRequestURI().contains("faces")) || !(req.getRequestURI().toString().contains("Warehouse"))){
         
            resp.sendRedirect("faces/index.xhtml");
            return;
@@ -70,7 +77,6 @@ public class LoginFilter implements Filter{
             
             
             if(logcon.getCurrentuser() == null){
-                //resp.sendRedirect(req.getContextPath()+ "/faces/index.xhtml");
                resp.sendRedirect("index.xhtml");
                return;
             }
